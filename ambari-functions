@@ -174,7 +174,7 @@ amb-start-node() {
     MORE_OPTIONS="$@"
   fi
 
-  run-command docker run -P --expose=8088 $MORE_OPTIONS $DOCKER_OPTS --privileged --name ${NODE_PREFIX}$NUMBER -h ${NODE_PREFIX}${NUMBER}.service.consul $AMBARI_AGENT_IMAGE \
+  run-command docker run -P --expose=8088 --expose=8042 $MORE_OPTIONS $DOCKER_OPTS --privileged --name ${NODE_PREFIX}$NUMBER -h ${NODE_PREFIX}${NUMBER}.service.consul $AMBARI_AGENT_IMAGE \
               systemd.setenv=NAMESERVER_ADDR=$(get-consul-ip)
 
   _consul-register-service ${NODE_PREFIX}${NUMBER} $(get-host-ip ${NODE_PREFIX}$NUMBER)
